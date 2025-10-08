@@ -1,7 +1,7 @@
 package org.example.transactionservice.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.transactionservice.dto.AtmRequest;
+import org.example.transactionservice.payload.AccountPayload;
 import org.example.transactionservice.model.Transaction;
 import org.example.transactionservice.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +16,8 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping("/log")
-    public void transactionLog(@RequestBody AtmRequest atmRequest){
-        transactionService.transactionLog(atmRequest);
+    public void transactionLog(@RequestBody AccountPayload accountPayload){
+        transactionService.transactionLog(accountPayload);
     }
 
     @GetMapping("/{transactionId}")
