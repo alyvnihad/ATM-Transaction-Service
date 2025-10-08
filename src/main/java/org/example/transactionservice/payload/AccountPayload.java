@@ -1,9 +1,9 @@
-package org.example.transactionservice.dto;
+package org.example.transactionservice.payload;
 
 import lombok.Data;
 
 @Data
-public class AtmRequest {
+public class AccountPayload {
     private Long accountId;
     private Long cardNumber;
     private String type;
