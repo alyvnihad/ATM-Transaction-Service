@@ -1,7 +1,7 @@
 package org.example.transactionservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.transactionservice.dto.AtmRequest;
+import org.example.transactionservice.payload.AccountPayload;
 import org.example.transactionservice.model.Transaction;
 import org.example.transactionservice.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
@@ -15,13 +15,13 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
 
-    public void transactionLog(AtmRequest atmRequest){
+    public void transactionLog(AccountPayload accountPayload){
         Transaction transaction = new Transaction();
-        transaction.setAccountId(atmRequest.getAccountId());
-        transaction.setCardNumber(atmRequest.getCardNumber());
-        transaction.setType(atmRequest.getType());
-        transaction.setAmount(atmRequest.getAmount());
-        transaction.setAtmId(atmRequest.getAtmId());
+        transaction.setAccountId(accountPayload.getAccountId());
+        transaction.setCardNumber(accountPayload.getCardNumber());
+        transaction.setType(accountPayload.getType());
+        transaction.setAmount(accountPayload.getAmount());
+        transaction.setAtmId(accountPayload.getAtmId());
         transaction.setCreatedAt(LocalDateTime.now());
         transactionRepository.save(transaction);
     }
