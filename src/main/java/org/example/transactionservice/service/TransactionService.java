@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -65,5 +66,9 @@ public class TransactionService {
         }catch (Exception e){
             throw new RuntimeException("Not found by account id");
         }
+    }
+
+    public List<Transaction> dailyLog(LocalDate date){
+        return transactionRepository.dailyTransaction(date);
     }
 }
