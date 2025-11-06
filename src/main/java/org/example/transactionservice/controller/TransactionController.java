@@ -6,6 +6,7 @@ import org.example.transactionservice.model.Transaction;
 import org.example.transactionservice.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,5 +29,10 @@ public class TransactionController {
     @GetMapping("/accountId/{id}")
     public List<Transaction> accountId(@PathVariable Long id){
         return transactionService.getAccountId(id);
+    }
+
+    @PostMapping("/daily-log")
+    public List<Transaction> dailyLog (LocalDate date){
+        return transactionService.dailyLog(date);
     }
 }
