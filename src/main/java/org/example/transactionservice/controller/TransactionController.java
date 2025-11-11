@@ -21,7 +21,7 @@ public class TransactionController {
         transactionService.transactionLog(accountPayload);
     }
 
-    @GetMapping("/{transactionId}")
+    @GetMapping("/transactionId/{transactionId}")
     public Transaction transactionId(@PathVariable Long transactionId){
         return transactionService.getTransactionId(transactionId);
     }
