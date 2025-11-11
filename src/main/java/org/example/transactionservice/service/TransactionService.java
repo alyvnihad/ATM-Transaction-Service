@@ -7,6 +7,8 @@ import org.example.transactionservice.payload.AccountPayload;
 import org.example.transactionservice.model.Transaction;
 import org.example.transactionservice.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,8 +49,13 @@ public class TransactionService {
         notificationRequest.setAmount(accountPayload.getAmount());
         notificationRequest.setDateTime(transaction.getCreatedAt());
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(accountPayload.getToken());
+
+        HttpEntity<NotificationRequest> entity = new HttpEntity<>(notificationRequest,headers);
+
         // Send email with notification service called
-        restTemplate.postForEntity(notificationUrl + "/email-log", notificationRequest, Void.class);
+        restTemplate.postForEntity(notificationUrl + "/email-log", entity, Void.class);
 
     }
 
@@ -68,6 +75,7 @@ public class TransactionService {
         }
     }
 
+    // Report service request this return daily log show
     public List<Transaction> dailyLog(LocalDate date){
         return transactionRepository.dailyTransaction(date);
     }
