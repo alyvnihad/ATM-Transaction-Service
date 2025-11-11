@@ -10,4 +10,5 @@ public class AccountPayload {
     private String type;
     private Double amount;
     private Long atmId;
+    private String token;
 }
