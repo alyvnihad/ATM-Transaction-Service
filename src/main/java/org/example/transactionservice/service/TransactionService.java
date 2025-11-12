@@ -3,6 +3,7 @@ package org.example.transactionservice.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.transactionservice.dto.NotificationRequest;
+import org.example.transactionservice.exception.NotFoundException;
 import org.example.transactionservice.payload.AccountPayload;
 import org.example.transactionservice.model.Transaction;
 import org.example.transactionservice.repository.TransactionRepository;
@@ -62,7 +63,7 @@ public class TransactionService {
     // Get transaction by ID
     public Transaction getTransactionId(Long id){
         return transactionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not found by transaction id"));
+                .orElseThrow(() -> new NotFoundException("Not found by transaction id"));
 
     }
 
@@ -71,7 +72,7 @@ public class TransactionService {
         try {
             return transactionRepository.findByAccountId(id);
         }catch (Exception e){
-            throw new RuntimeException("Not found by account id");
+            throw new NotFoundException("Not found by account id");
         }
     }
 
